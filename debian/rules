@@ -1,4 +1,4 @@
-#!/usr/bin/make -f
+#!/data/data/com.termux/files/usr/bin/make -f
 #
 # Makefile for dh-make package
 %:

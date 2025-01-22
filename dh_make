@@ -1,4 +1,4 @@
-#!/usr/bin/perl 
+#!/data/data/com.termux/files/usr/bin/perl 
 #
 # dh_make - Script to prepare Debian packaging for an original source archive
 #
@@ -14,7 +14,7 @@ use strict;
 $Getopt::Long::autoabbrev = 0;
 
 # Some important parameters
-our $DHLIB="/usr/share/debhelper/dh_make";
+our $DHLIB="/data/data/com.termux/files/usr/share/debhelper/dh_make";
 our $POLICY_VERSION="3.9.2";
 our $DH_MAKE_VERSION="0.60";
 my %PACKAGE_TYPES = ( 's' => 'Single', 'l' => 'Library',
@@ -290,9 +290,9 @@ sub get_username
 	return $tmpusername if ($tmpusername ne "");
 
 	my $logname = get_logname();
-	if (-x '/usr/bin/getent')
+	if (-x '/data/data/com.termux/files/usr/bin/getent')
 	{
-		$tmpusername = qx(/usr/bin/getent passwd $logname|awk -F: '\{ print \$5; \}' | cut -f1 -d,);
+		$tmpusername = qx(/data/data/com.termux/files/usr/bin/getent passwd $logname|awk -F: '\{ print \$5; \}' | cut -f1 -d,);
 	}
 	chomp($tmpusername);
 	return $tmpusername if ($tmpusername ne "");
@@ -301,14 +301,14 @@ sub get_username
 	chomp($tmpusername);
 	return $tmpusername if ($tmpusername ne "");
 	
-	if (-x '/usr/bin/ypmatch')
+	if (-x '/data/data/com.termux/files/usr/bin/ypmatch')
 	{
 		$tmpusername = qx(ypmatch $logname passwd.byname|awk -F: '\{ print \$5; \}' | cut -f1 -d,);
 	}
 	chomp($tmpusername);
 	return $tmpusername if ($tmpusername ne "");
 
-	if (-x '/usr/bin/ldapsearch')
+	if (-x '/data/data/com.termux/files/usr/bin/ldapsearch')
 	{
 		$tmpusername = [map {/^(?:gecos|cn): (.*)/} qx(ldapsearch -Q -LLL uid=$logname gecos cn)]->[0];
 	}
@@ -323,7 +323,7 @@ sub get_email()
 	return $ENV{DEBEMAIL} if ($ENV{DEBEMAIL} );
 	return $ENV{EMAIL} if ($ENV{EMAIL} );
 	my $logname = get_logname();
-	if (-x '/usr/bin/ldapsearch')
+	if (-x '/data/data/com.termux/files/usr/bin/ldapsearch')
 	{
 		my $mail;
 		$mail = [map {/^mail: (.*)/ && $1} qx(ldapsearch -Q -LLL uid=$logname mail)]->[0];
@@ -332,9 +332,9 @@ sub get_email()
 	if ($logname )
 	{
 		my $mailhost;
-		if ( -e '/etc/mailname')
+		if ( -e '/data/data/com.termux/files/usr/etc/mailname')
 		{
-			$mailhost = qx(cat /etc/mailname);
+			$mailhost = qx(cat /data/data/com.termux/files/usr/etc/mailname);
 			chomp($mailhost);
 	 	} else {
 			$mailhost='unknown';
@@ -571,20 +571,20 @@ our ($PATCH_CLASS,$PATCH_STAMP,$PATCH_CLEAN);
 # Setup debian/rules
 if (-x "./configure" )
 {
-	$CDBS_CLASS="include /usr/share/cdbs/1/class/autotools.mk";
+	$CDBS_CLASS="include /data/data/com.termux/files/usr/share/cdbs/1/class/autotools.mk";
 	$CONFIG_STATUS="config.status";
 	$CONFIGURE_STAMP='';
 	$PHONY_CONFIGURE='';
 	$CONFIGURE="config.status: configure\n".
 		 "\tdh_testdir\n".
 		 "\t# Add here commands to configure the package.\n".
-		 "ifneq \"\$(wildcard /usr/share/misc/config.sub)\" \"\"\n".
-		 "\tcp -f /usr/share/misc/config.sub config.sub\n".
+		 "ifneq \"\$(wildcard /data/data/com.termux/files/usr/share/misc/config.sub)\" \"\"\n".
+		 "\tcp -f /data/data/com.termux/files/usr/share/misc/config.sub config.sub\n".
 		 "endif\n".
-		 "ifneq \"\$(wildcard /usr/share/misc/config.guess)\" \"\"\n".
-		 "\tcp -f /usr/share/misc/config.guess config.guess\n".
+		 "ifneq \"\$(wildcard /data/data/com.termux/files/usr/share/misc/config.guess)\" \"\"\n".
+		 "\tcp -f /data/data/com.termux/files/usr/share/misc/config.guess config.guess\n".
 		 "endif\n".
-		 "\t".'./configure $(CROSS) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"'."\n";
+		 "\t".'./configure $(CROSS) --prefix=/data/data/com.termux/files/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"'."\n";
 	$DPKG_ARCH="# These are used for cross-compiling and for saving the configure script\n".
 			 "# from having to guess our platform (since we know it already)\n".
 			 'DEB_HOST_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)'."\n".
@@ -609,9 +609,9 @@ if (-x "./configure" )
 	} else {
 		if ( $package_type eq "l")
 		{
-			$INSTALL="\$(MAKE) prefix=\$(CURDIR)/debian/tmp/usr install";
+			$INSTALL="\$(MAKE) prefix=\$(CURDIR)/debian/tmp/data/data/com.termux/files/usr install";
 	 	} else {
-			$INSTALL="\$(MAKE) prefix=\$(CURDIR)/debian/$package_name/usr install";
+			$INSTALL="\$(MAKE) prefix=\$(CURDIR)/debian/$package_name/data/data/com.termux/files/usr install";
 	 	}
 	}
 	$CLEAN="[ ! -f Makefile ] || \$(MAKE) distclean\n".
@@ -619,7 +619,7 @@ if (-x "./configure" )
 	$BUILD_DEPS .= ', autotools-dev';
 	$DH7_ADDON .= ' --with autotools-dev';
 } elsif (-f 'CMakeLists.txt') {
-	$CDBS_CLASS="include /usr/share/cdbs/1/class/cmake.mk";
+	$CDBS_CLASS="include /data/data/com.termux/files/usr/share/cdbs/1/class/cmake.mk";
 	$CONFIG_STATUS="builddir/Makefile";
 	$CONFIGURE_STAMP='';
 	$PHONY_CONFIGURE='';
@@ -627,7 +627,7 @@ if (-x "./configure" )
 				 "\tdh_testdir\n".
 			 "\t# Add here commands to configure the package.\n".
 			 "\t".'mkdir -p builddir'."\n".
-			 "\t".'cd builddir && cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_C_FLAGS="$(CFLAGS)" -DCMAKE_LD_FLAGS="-Wl,-z,defs" -DCMAKE_CXX_FLAGS="$(CXXFLAGS)" -DCMAKE_SKIP_RPATH=ON -DCMAKE_VERBOSE_MAKEFILE=ON'."\n";
+			 "\t".'cd builddir && cmake .. -DCMAKE_INSTALL_PREFIX=/data/data/com.termux/files/usr -DCMAKE_C_FLAGS="$(CFLAGS)" -DCMAKE_LD_FLAGS="-Wl,-z,defs" -DCMAKE_CXX_FLAGS="$(CXXFLAGS)" -DCMAKE_SKIP_RPATH=ON -DCMAKE_VERBOSE_MAKEFILE=ON'."\n";
 	$MAKE="\$(MAKE) -C builddir";
 	# If it is a library then install into tmp
 	if ( $package_type eq "l")
@@ -644,7 +644,7 @@ if (-x "./configure" )
 	{
 	 print "Currently there is no top level Makefile. This may require additional tuning.\n";
 	}
-	$CDBS_CLASS="include /usr/share/cdbs/1/class/makefile.mk";
+	$CDBS_CLASS="include /data/data/com.termux/files/usr/share/cdbs/1/class/makefile.mk";
 	$CONFIGURE_STAMP='configure-stamp';
 	$CONFIG_STATUS='';
 	$CONFIGURE="configure: configure-stamp\n".

@@ -1,4 +1,4 @@
-#! /bin/sh -e
+#!/data/data/com.termux/files/usr/bin/sh -e
 # /usr/lib/emacsen-common/packages/install/#PACKAGE#
 
 # Written by Jim Van Zandt <jrv@debian.org>, borrowing heavily

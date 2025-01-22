@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/data/data/com.termux/files/usr/bin/sh -e
 # /usr/lib/emacsen-common/packages/remove/#PACKAGE#
 
 FLAVOR=$1

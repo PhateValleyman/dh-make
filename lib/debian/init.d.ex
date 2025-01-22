@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 ### BEGIN INIT INFO
 # Provides:          #PACKAGE#
 # Required-Start:    $network $local_fs

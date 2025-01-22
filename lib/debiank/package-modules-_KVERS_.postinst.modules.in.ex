@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 # postinst script for modules package built from #PACKAGE#
 
 set -e

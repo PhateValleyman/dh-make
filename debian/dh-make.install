@@ -1,2 +1,2 @@
-dh_make usr/bin
-lib/* usr/share/debhelper/dh_make
+dh_make data/data/com.termux/files/usr/bin
+lib/* data/data/com.termux/files/usr/share/debhelper/dh_make

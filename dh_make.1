@@ -40,7 +40,7 @@ package. Choose this for larger packages that need to be split.
 .TP
 .B Library (l)
 The package will generate at least two binaries. One library package
-containing just the lib in \fI/usr/lib\fR and another *\-dev_*.deb package
+containing just the lib in \fI/data/data/com.termux/files/usr/lib\fR and another *\-dev_*.deb package
 containing documentation and C headers.
 .TP
 .B Kernel module (k)
@@ -192,7 +192,7 @@ Email address to use in control and changelog entries, only used if \fBDEBEMAIL\
 Default username used for looking up email and full name in other directories.
 .SH FILES
 .TP
-.I /usr/share/debhelper/dh_make
+.I /data/data/com.termux/files/usr/share/debhelper/dh_make
 Directory that contains all the template files, separated in six
 directories: 
 .TP
@@ -254,5 +254,5 @@ may not detect your username and email address correctly when using sudo.
 .BR dpkg (1), dpkg\-buildpackage (1), dh (1), make\-kpkg (1), debhelper (7)
 .P
 You may also want to read the Debian Policy (in
-\fI/usr/share/doc/debian\-policy \fR) and the New Maintainers' Guide (in
-\fI/usr/share/doc/maint-guide\fR).
+\fI/data/data/com.termux/files/usr/share/doc/debian\-policy \fR) and the New Maintainers' Guide (in
+\fI/data/data/com.termux/files/usr/share/doc/maint-guide\fR).

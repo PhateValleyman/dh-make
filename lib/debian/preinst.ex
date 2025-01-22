@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 # preinst script for #PACKAGE#
 #
 # see: dh_installdeb(1)
